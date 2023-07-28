@@ -6,32 +6,31 @@ ID     : A01688757
 To validate the installation of tools, access the following file.
 
 ## Activity
-In this activity, you will verify that with the requeriments-310.txt file we have no issues in a virtual environment created in a `Python 3.10` version.
+In this activity, you will verify that with the `requeriments-310.txt` file we have no issues in a virtual environment created in a `Python 3.10` version.
 
 Previously we had this file `requirements-37.txt`
-A. But if we tried to install those libraries on Python 3.10 we get something like this:
+ But if we tried to install those libraries on Python 3.10 we get something like this:
     <details open>
-    
-    
-    ...
+        ...
     note: This error originates from a subprocess, and is likely not a problem with pip.
     error: subprocess-exited-with-error
     
     × pip subprocess to install build dependencies did not run successfully.
     │ exit code: 1
     ╰─> See above for output.
-    ```
+    
     note: This error originates from a subprocess, and is likely not a problem with pip.
-    ```bash 
+    
     [notice] A new release of pip is available: 23.0.1 -> 23.2
     [notice] To update, run: pip install --upgrade pip
-    ```
+    
 </details>    
     
     This means that the package installation was not successful.
 
 Follow the instructions below to do the activity.
 ### Run the existing notebook
+1. Clone the project `https://github.com/Pacozenon/mlopsP1.git` on your local computer.
 
 2. Create a virtual environment with `Python 3.10`
     * Create venv
@@ -59,7 +58,7 @@ Follow the instructions below to do the activity.
     ```
 
 
-5. Open the `/session-3/end_to_end_machine_learning_project.ipynb` notebook and click on `Run All`.  
+5. Open the `mlopsp1/session-3/end_to_end_machine_learning_project.ipynb` notebook and click on `Run All`.  
 Make sure to change the notebook kernel to `python310` version, and `Run All` cells.  
     If everything was ok, you should be able to see the last cell with this output:
     ```bash
