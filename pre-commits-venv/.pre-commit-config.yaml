@@ -7,15 +7,14 @@ repos:
         exclude: '^$'  # Specify files or patterns to exclude, '^$' excludes nothing (all files will be checked)
 
   - repo: https://github.com/PyCQA/autoflake
-    rev: v2.2.0
+    rev: 'v2.2.0'
     hooks:
-      - id: autoflake
-        args:
-          - --in-place
-          - --remove-all-unused-imports
-          - --expand-star-imports
-          - --remove-duplicate-keys
-          - --remove-unused-variables  
+        - id: autoflake
+          name: Remove unused variables and imports
+          language: python
+          args: ["--in-place", "--remove-all-unused-imports", "--remove-unused-variables", "--expand-star-imports"]
+          files: \.py$
+
  
   - repo: https://github.com/PyCQA/flake8
     rev: 6.0.0
