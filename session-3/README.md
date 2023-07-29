@@ -65,7 +65,8 @@ Make sure to change the notebook kernel to `python310` version, and `Run All` ce
     Predictions:	 [263527.   331884.02 221119.   ... 105722.   213199.   459125.66]
 
 ## Deliverable
-The file is not going to be uploaded yet, so just keep it until the next session.
+## Deliverable
+[Archivo requerimientos compatible con Python 3.10](https://github.com/Pacozenon/mlopsP1/blob/main/session-3/requirements-310.txt)
 
 
 

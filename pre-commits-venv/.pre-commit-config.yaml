@@ -1,29 +1,28 @@
 repos:
-  - repo: https://github.com/pre-commit/mirrors-autopep8
-    rev: 'v2.0.2'  # Specify a specific version/tag/commit or leave empty for the latest version
-    hooks:
-      - id: autopep8
-        exclude: '^$'  # Specify files or patterns to exclude, '^$' excludes nothing (all files will be checked)
 
-  - repo: https://github.com/PyCQA/autoflake
-    rev: 'v2.2.0'
-    hooks:
+    - repo: https://github.com/PyCQA/autoflake
+      rev: 'v2.2.0'
+      hooks:
         - id: autoflake
           name: Remove unused variables and imports
           language: python
           args: ["--in-place", "--remove-all-unused-imports", "--remove-unused-variables", "--expand-star-imports"]
           files: \.py$
 
-  - repo: https://github.com/PyCQA/flake8
-    rev: 6.0.0
-    hooks:
+    -  repo: https://github.com/pycqa/isort
+       rev: 5.12.0
+       hooks:
+       - id: isort
+         name: isort (python)
+
+    - repo: https://github.com/PyCQA/flake8
+      rev: 6.0.0
+      hooks:
       - id: flake8
         args: [--ignore=E501]
 
-  - repo: https://github.com/pycqa/isort
-    rev: 5.12.0
-    hooks:
-      - id: isort
-        name: isort (python)
-        
-
+    - repo: https://github.com/pre-commit/mirrors-autopep8
+      rev: 'v2.0.2'  # Specify a specific version/tag/commit or leave empty for the latest version
+      hooks:
+      - id: autopep8
+        exclude: '^$'  # Specify files or patterns to exclude, '^$' excludes nothing (all files will be checked)
