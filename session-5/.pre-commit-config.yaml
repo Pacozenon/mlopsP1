@@ -1,4 +1,20 @@
 repos:
+- repo: https://github.com/pre-commit/mirrors-autopep8
+  rev: ''
+  hooks:
+      - id: autopep8
+        exclude: '^$'  # Specify files or patterns to exclude, '^$' excludes nothing (all files will be checked)
+
+- repo: https://github.com/PyCQA/flake8
+  rev: 6.0.0
+  hooks:
+  - id: flake8
+    args: [--ignore=E501]
+
+- repo: https://github.com/PyCQA/autoflake
+  rev: v2.2.0
+  hooks:
+    - id: autoflake    
 
 - repo: https://github.com/astral-sh/ruff-pre-commit
   # Ruff version.

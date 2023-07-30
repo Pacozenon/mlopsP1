@@ -7,11 +7,6 @@ In this activity, you will modify the [`.pre-commit-config.yaml`](./.pre-commit-
 Follow the instructions in the [README.md](../README.md) if you do not know how to setup the pre-commits.
 
 ## Repos
-0. Install repo libraries
-```bash
-   pip install ruff
-   pip install black
-```
 1. **Sort libraries**  
 Include a repo that sort the imports of dependencies expressed in the [PEP8 style for Imports](https://pep8.org/#imports).
     
@@ -67,7 +62,7 @@ Include a repo that sort the imports of dependencies expressed in the [PEP8 styl
     [Autoflake](https://pypi.org/project/autoflake/) or [Pylint](https://pypi.org/project/pylint/) are a couple of alternatives to do this. Figure out how to use it in the pre-commit or **even combine them**.
 
 ## Code
-The following  Python code will be used to test the repos in that you have included in the `.pre-commit-config.yaml` file.
+The following Python code will be used to test the repos in that you have included in the `.pre-commit-config.yaml` file.
 
 * Modify the Python `iris.py` file with this code:
     ```python

@@ -1,135 +1,229 @@
-# Activity Session 5: pre-commit
-Student: Francisco Javier Torres Zenon
-ID     : A01688757
+# Continuos Integration Part 1
+Instructor: Carlos Mejia
 
-In this activity, you will modify the [`.pre-commit-config.yaml`](./.pre-commit-config.yaml) file to meet the following requirements once you do commit.
+## Pre-commits
+Pre-commits are automated checks that run on your code before you commit changes, helping ensure code quality and consistency. In this guide, we'll use the `pre-commit` tool to set up pre-commits for Python projects in Visual Studio Code (VSC).
 
-Follow the instructions in the [README.md](../README.md) if you do not know how to setup the pre-commits.
+### Prerequisites
 
-## Repos
-1. **Sort libraries**  
-Include a repo that sort the imports of dependencies expressed in the [PEP8 style for Imports](https://pep8.org/#imports).
+1. Python is installed on your system.
+2. Visual Studio Code (VSC) is installed on your system.
+3. `pip` is installed on your system.
+
+### Step 1: Install `pre-commit`
+
+First, you need to install the `pre-commit` tool on your system. Open your terminal or command prompt and run the following command:
+
+```bash
+pip install pre-commit
+```
+
+
+### Step 2: Create a Pre-Commit Configuration File
+Create a file named `.pre-commit-config.yaml` in the root of your Python project. This file will define the pre-commit hooks to be executed.
+
+### Step 3: Configure Pre-Commit Hooks
+In the `.pre-commit-config.yaml` file, define the pre-commit hooks you want to run. Each hook represents a specific check on your code. There are many pre-configured hooks available, and you can also create custom hooks if needed.
+
+Here's the code `.pre-commit-config.yaml` with the pre-commit hooks we will use in this course for Python:
+
+```yaml
+repos:
+- repo: https://github.com/pre-commit/mirrors-autopep8
+    rev: ''  # Specify a specific version/tag/commit or leave empty for the latest version
+    hooks:
+      - id: autopep8
+        exclude: '^$'  # Specify files or patterns to exclude, '^$' excludes nothing (all files will be checked)
+
+- repo: https://github.com/PyCQA/flake8
+  rev: 6.0.0
+  hooks:
+  - id: flake8
+    args: [--ignore=E501]
+```
+
+### Step 4: Initialize Pre-Commit for Your Project
+After creating the `.pre-commit-config.yaml` file, initialize pre-commit for your project. Open your terminal or command prompt, navigate to the root directory of your project, and run the following command:
+```bash
+pre-commit install
+```
+Output
+```bash
+pre-commit installed at .git/hooks/pre-commit
+```
+> **NOTE**  
+If you want to see the default hidden folder `.git`, follow the steps in this link: https://linuxpip.org/vscode-show-hidden-files/
+
+### Step 5: Commit Your Changes
+With the pre-commit hooks installed, you can now make changes to your Python code. When you're ready to commit your changes, run the following command to trigger the pre-commit checks:
+
+```bash
+git commit -m "add pre-commit file"
+```
+Output
+
+ <details open>
+    <summary>Pre-commit output, click to collapse</summary>
     
-    For example, having this code and before sorting:
-    ```python
-    from my_lib import Object
-
-    import os
-
-    from my_lib import Object3
-
-    from my_lib import Object2
-
-    import sys
-
-    from third_party import lib15, lib1, lib2, lib3, lib4, lib5, lib6, lib7, lib8, lib9, lib10, lib11, lib12, lib13, lib14
-
-    import sys
-
-    from __future__ import absolute_import
-
-    from third_party import lib3
-
-    print("Hey")
-    print("yo")
+    ```bash
+    [WARNING] The 'rev' field of repo 'https://github.com/pre-commit/mirrors-autopep8' appears to be a mutable reference (moving tag / branch).  Mutable references are never updated after first install and are not supported.  See https://pre-commit.com/#using-the-latest-version-for-a-repository for more details.  Hint: `pre-commit autoupdate` often fixes this.
+    [INFO] Initializing environment for https://github.com/pre-commit/mirrors-autopep8.
+    [INFO] Initializing environment for https://github.com/PyCQA/flake8.
+    [INFO] Installing environment for https://github.com/pre-commit/mirrors-autopep8.
+    [INFO] Once installed this environment will be reused.
+    [INFO] This may take a few minutes...
+    [INFO] Installing environment for https://github.com/PyCQA/flake8.
+    [INFO] Once installed this environment will be reused.
+    [INFO] This may take a few minutes...
+    autopep8.............................................(no files to check)Skipped
+    flake8...............................................(no files to check)Skipped
+    [main 210cf52] add pre-commit file
+    3 files changed, 77 insertions(+)
+    create mode 100644 .pre-commit-config.yaml
+    create mode 100644 module-2/session-5/README.md
     ```
-
-    After sorting:
-    ```python
-    from __future__ import absolute_import
-
-    import os
-    import sys
-
-    from third_party import (lib1, lib2, lib3, lib4, lib5, lib6, lib7, lib8,
-                            lib9, lib10, lib11, lib12, lib13, lib14, lib15)
-
-    from my_lib import Object, Object2, Object3
-
-    print("Hey")
-    print("yo")
-    ```
-
-    > HINT  
-    The `isort` Python library can help you with this, but **you have to install it in the pre-commit** file.
-
-2. **Delete unused imports**  
-    Include another repo to remove the unused imports every commit.  
-
-    For example, if you are including the `import sys` Python library but not using it, once you run the precommit, you should upload only the used imports.
+    </details>
     
-    > **HINT**  
-    [Autoflake](https://pypi.org/project/autoflake/) or [Pylint](https://pypi.org/project/pylint/) are a couple of alternatives to do this. Figure out how to use it in the pre-commit or **even combine them**.
 
-## Code
-The following Python code will be used to test the repos in that you have included in the `.pre-commit-config.yaml` file.
+Pre-commit will run all the defined hooks on the files you've staged for the commit. If any issues are found (e.g., trailing whitespace, linting errors, etc.), the commit will be halted, and you'll need to address the problems before you can successfully commit.
 
-* Modify the Python `iris.py` file with this code:
-    ```python
-    import os # This is an unused import
-    import json # This is an unused import
-    from sklearn.datasets import load_iris # Import in incorrect order
+### Step 6. Add a new file
+* Please create a python file called `iris.py`, and copy the following code into it.
+```python
+from sklearn.datasets import load_iris
 
-    import numpy as np # Import in incorrect order
-    import json # This is an unused import
+import numpy as np
 
-    from my_library import test # This is an unused import
-    from sklearn.linear_model import LogisticRegression # Import in incorrect order
+from sklearn.linear_model import LogisticRegression
 
-    # Load data from sklearn
-    X, y = load_iris(return_X_y=True)
+# Load data from sklearn
+X, y = load_iris(return_X_y=True)
 
-    # Train the model using regresion logistic
-    clf = LogisticRegression(solver='lbfgs',max_iter=1000,multi_class='multinomial').fit(X, y)
-    # Define iris types
-    iris_type = {0: 'setosa',1: 'versicolor',2: 'virginica'}
-
-
-    # Define dummy values
-    sepal_length, sepal_width, petal_length, petal_width = 2, 3, 4, 6
-
-    X = [sepal_length, sepal_width, petal_length, petal_width]
+# Train the model using regresion logistic
+clf = LogisticRegression(solver='lbfgs',
+                         max_iter=1000,
+                         multi_class='multinomial').fit(X, y)
+# Define iris types
+iris_type = {
+    0: 'setosa',
+    1: 'versicolor',
+    2: 'virginica'
+}
 
 
-    # Make a prediction
 
-    prediction = clf.predict_proba([X])
-    print({'class': iris_type[np.argmax(prediction)],'probability':round(max(prediction[0]), 2)})
+# Define dummy values
+sepal_length, sepal_width, petal_length, petal_width = 2, 3, 4, 6
+
+X = [sepal_length, sepal_width, petal_length, petal_width]
+
+
+
+# Make a prediction
+
+prediction = clf.predict_proba([X])
+print({'class': iris_type[np.argmax(prediction)],'probability': round(max(prediction[0]), 2)})
+```
+* Try to commit the file with the following message running in the console:
+```bash
+git commit -m "add iris file"
+```
+Output:
+```bash
+[WARNING] Unstaged files detected.
+[INFO] Stashing unstaged files to /Users/.../.cache/pre-commit/patch1690330398-66588.
+[WARNING] The 'rev' field of repo 'https://github.com/pre-commit/mirrors-autopep8' appears to be a mutable reference (moving tag / branch).  Mutable references are never updated after first install and are not supported.  See https://pre-commit.com/#using-the-latest-version-for-a-repository for more details.  Hint: `pre-commit autoupdate` often fixes this.
+autopep8.................................................................Failed
+- hook id: autopep8
+- files were modified by this hook
+flake8...................................................................Passed
+[WARNING] Stashed changes conflicted with hook auto-fixes... Rolling back fixes...
+[INFO] Restored changes from /Users/.../.cache/pre-commit/patch1690330398-66588.
+```
+This means that `flake8` worked, and `autopep8` did not.
+
+### Step 7. Running `autopep8`
+To fix the `autopep8`, follow the instructions below:
+1. Install it using `pip`:
+    ```bash
+    pip install autopep8
     ```
-* Do the commit to activate the pre-commit. The `iris.py` file output should look like this:
-    ```python
-    import numpy as np
-    from sklearn.datasets import load_iris
-    from sklearn.linear_model import LogisticRegression
-
-    # Load data from sklearn
-    X, y = load_iris(return_X_y=True)
-
-    # Train the model using regresion logistic
-    clf = LogisticRegression(
-        solver='lbfgs',
-        max_iter=1000,
-        multi_class='multinomial').fit(X, y)
-    # Define iris types
-    iris_type = {0: 'setosa', 1: 'versicolor', 2: 'virginica'}
-
-
-    # Define dummy values
-    sepal_length, sepal_width, petal_length, petal_width = 2, 3, 4, 6
-
-    X = [sepal_length, sepal_width, petal_length, petal_width]
-
-
-    # Make a prediction
-
-    prediction = clf.predict_proba([X])
-    print({'class': iris_type[np.argmax(prediction)],
-        'probability': round(max(prediction[0]), 2)})
+2. Run `autopep8` with the Python file
+    ```bash
+    autopep8 --in-place --aggressive --aggressive module-2/session-5/iris.py
+    ```
+    The above command will apply more aggressive formatting to your Python file.
+3. Run again the commit command, and you will see that the test has passed.
+    ```bash
+    git commit -m "add iris file"
+    ```
+    Output:
+    ```
+    `git add .pre-commit-config.yaml` to fix this.
+    (pre-commits-env) (base) carloslme:itesm-mlops carlos$ git commit -m "add iris file"
+    [WARNING] Unstaged files detected.
+    [INFO] Stashing unstaged files to /Users/carlos/.cache/pre-commit/patch1690331306-67140.
+    [INFO] Initializing environment for https://github.com/pre-commit/mirrors-autopep8.
+    [INFO] Installing environment for https://github.com/pre-commit/mirrors-autopep8.
+    [INFO] Once installed this environment will be reused.
+    [INFO] This may take a few minutes...
+    autopep8.................................................................Passed
+    flake8...................................................................Passed
+    [INFO] Restored changes from /Users/carlos/.cache/pre-commit/patch1690331306-67140.
+    [main 8373807] add iris file
+    2 files changed, 33 insertions(+), 1 deletion(-)
+    create mode 100644 module-2/session-5/iris.py
     ```
 
-    The corrected code above should be the one that is going to be sent to the repository.
+### Step 8. Modify the `.pre-commit-config.yaml` file
+* Include the `args: [--verbose]` code to add an explanation about what is wrong in the code.
+    ```yaml
+    repos:
+    - repo: https://github.com/pre-commit/mirrors-autopep8
+    rev: ''  # Specify a specific version/tag/commit or leave empty for the latest version
+    hooks:
+        - id: autopep8
+        exclude: '^$'  # Specify files or patterns to exclude, '^$' excludes nothing (all files will be checked)
+        args: [--verbose]
 
-## Deliverable
-The deliverable is the `.pre-commit-config.yaml` file with the new repos included. This has to be uploaded to your repository.
+    - repo: https://github.com/PyCQA/flake8
+    rev: 6.0.0
+    hooks:
+    - id: flake8
+        args: [--ignore=E501]
+    ```
+    > **NOTE**  
+        Do not forget to change again the `iris.py` file to the original code in previous steps.
 
-The link to share the repo link is available in the Google form provided by the instructor (TBA)
+* Run the commit message again, and you should see something like this:
+    ```bash
+    ...
+    [INFO] Stashing unstaged files to /Users/carlos/.cache/pre-commit/patch1690331670-67562.
+    autopep8.................................................................Passed
+    flake8...................................................................Failed
+    - hook id: flake8
+    - exit code: 1
+
+    module-2/session-5/iris.py:23:1: E303 too many blank lines (3)
+    module-2/session-5/iris.py:30:1: E303 too many blank lines (3)
+    module-2/session-5/iris.py:33:49: E231 missing whitespace after ','
+    module-2/session-5/iris.py:33:95: W292 no newline at end of file
+    ```
+* Run again the `autopep8` and the file will be modified to handle the errors.
+
+* Once you have finished, you can include the following change in the `.pre-commit-config.yaml` file to run the `autopep8` code automatically and modify the Python file..
+
+    ```yaml
+    ...
+    - repo: https://github.com/pre-commit/mirrors-autopep8
+    rev: ''  # Specify a specific version/tag/commit or leave empty for the latest version
+    hooks:
+        - id: autopep8
+        exclude: '^$'  # Specify files or patterns to exclude, '^$' excludes nothing (all files will be checked)
+        args: [--verbose,  --in-place, --aggressive, --aggressive]
+
+    ```
+
+
+## Activity
+Please go to the [pre-commit.md](./activity/pre-commit.md) file to check the instructions for the activity.
