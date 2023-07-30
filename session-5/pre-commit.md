@@ -9,10 +9,10 @@ Follow the instructions in the [README.md](../README.md) if you do not know how 
 ## Repos
 0. Install repo libraries
 ```bash
-   pip install ruff
-   pip install black
+   pip install ruff black autopep8 flake8 autoflake isort
 ```
-1. **Sort libraries**  
+1. **Sort libraries**  done with **isort**
+
 Include a repo that sort the imports of dependencies expressed in the [PEP8 style for Imports](https://pep8.org/#imports).
     
     For example, having this code and before sorting:
@@ -58,7 +58,7 @@ Include a repo that sort the imports of dependencies expressed in the [PEP8 styl
     > HINT  
     The `isort` Python library can help you with this, but **you have to install it in the pre-commit** file.
 
-2. **Delete unused imports**  
+2. **Delete unused imports**  done with **ruff**
     Include another repo to remove the unused imports every commit.  
 
     For example, if you are including the `import sys` Python library but not using it, once you run the precommit, you should upload only the used imports.
@@ -137,4 +137,4 @@ The following  Python code will be used to test the repos in that you have inclu
 ## Deliverable
 The deliverable is the `.pre-commit-config.yaml` file with the new repos included. This has to be uploaded to your repository.
 
-The link to share the repo link is available in the Google form provided by the instructor (TBA)
+[].pre-commit-config.yaml] (https://github.com/Pacozenon/mlopsP1/blob/main/session-5/.pre-commit-config.yaml)
