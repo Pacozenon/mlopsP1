@@ -32,8 +32,11 @@ The red boxes indicate that a null value was found in the `age` field, and this 
 > ** FINAL PROGRAM**
 [custom-transformer.py](https://github.com/Pacozenon/mlopsP1/blob/main/session-6/custom-transformer.py)
 
-SALIDA DEL PROGRAMA ===>>
+Befor custom-transform:
 
-    ![Alt text](session-6_resultados1.png)
 
-    ![Alt text](session-6_resultados2.png)
+  ![Alt text](session-6_resultados1.png)
+
+After custom-transform is applied:
+
+  ![Alt text](session-6_resultados2.png)
