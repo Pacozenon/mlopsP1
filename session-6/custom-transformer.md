@@ -1,3 +1,7 @@
+# Activity Session 5: pre-commit
+Student: Francisco Javier Torres Zenon
+ID     : A01688757
+
 # Activity: Custom Transformer
 Create a custom transformer that allows to double the columns and add to the end the text "`_nan`" to each name  (column title). Then identify missing or null data in each row.
 
@@ -25,5 +29,11 @@ Check the following steps:
 
 The red boxes indicate that a null value was found in the `age` field, and this was marked as 1 in the `age_nan` added field.
 
-> **HINT**  
-Use the [template](custom-transformer.py) Python script to create your transformer.
+> ** FINAL PROGRAM**
+[custom-transformer.py](https://github.com/Pacozenon/mlopsP1/blob/main/session-6/custom-transformer.py)
+
+SALIDA DEL PROGRAMA ===>>
+
+    ![Alt text](session-6_resultados1.png)
+
+    ![Alt text](session-6_resultados2.png)
